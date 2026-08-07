@@ -1,0 +1,33 @@
+
+
+
+{
+  "name": "2nd_backend",
+  "version": "1.0.0",
+  "description": "a backend project next level",
+
+// ****1.****in javascript importing can be done in two ways 
+//    1. reqiure syntax - common.js and 2.import syntax - module
+//    in this project 2nd method is followed
+       "type": "commonjs",
+       "type":"module",
+
+
+
+  "keywords": [
+    "javascript",
+    "backend",
+    "coffee"
+  ],
+  "license": "ISC",
+  "author": "aryan",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+
+
+  //****2.*****"dev": "nodemon src/index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+}

@@ -1,0 +1,68 @@
+// first step is install cloudinary and multer
+
+npm install cloudinary
+npm i multer
+
+// now remember fs comes by default with node packages 
+// so no need to install it
+
+// add variables in .env file
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=***************************
+
+// create one file in utils with name cloudinay.js
+// data of the above file is written below
+
+import {v2 as cloudinary} from "cloudinary" ;
+import fs from "fs";
+
+// cloudinary.config ({
+//     cloud_name: 'chaiaurcode',
+//     api_key: ', 
+//     api_secret: '***************************'
+// });
+
+cloudinary.config ({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY , 
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+const uploadOnCloudinary = async (localFilePath) =>{
+  try{
+    if (!localFilePath) return null;
+
+    // upload the file on cloudinary
+    const response = await cloudinary.uploader.upload(localFilePath,{
+        resource_type:"auto"
+    });
+
+    // file has been uploaded successfully on cloudinary
+    console.log("file is uploaded on cloudinary " response.url);
+
+    return response;
+
+  }catch (error) {
+    fs.unlinkSync(localFilePath) // remove the locally saved temporary file 
+    // as the upload operation got failed 
+    return null;
+  }
+}
+
+
+// now create a new file in middlewares as multer.middleware.js
+
+import multer from "multer";
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null,"./public/temp")
+    },
+
+    filename: function (req, file, cb){
+        cb(null, file.originalname)
+    }
+})
+
+export const upload = multer({ storage: storage })

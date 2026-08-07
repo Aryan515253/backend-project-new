@@ -1,0 +1,7 @@
+touch command can be used to crete files from the terminal
+syntax : touch app.js constants.js index.js
+
+command to install dev dependency nodemon
+~$npm i -D nodemon
+
+~$mkdir controllers db middlewares models routes utils
